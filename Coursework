@@ -1,0 +1,98 @@
+import os
+import csv
+import pygubu
+import tkinter as tk
+from tkinter import *
+from tkinter import messagebox
+from collections import defaultdict
+#this coursework
+
+faculty_of_engineering = './candidates/faculty_officers_1/faculty_of_engineering' \
+                         '_and_science_0/faculty_of_engineering_and_science_candidates.txt'
+f_o_e_s_count_votes = './candidates/faculty_officers_1/faculty_of_engineering' \
+                      '_and_science_0/faculty_of_engineering_and_science_count_votes.csv'
+
+
+faculty_of_information = './candidates/faculty_officers_1/faculty_of_information_' \
+                         'technology_1/faculty_of_information_technology_candidates.txt'
+f_o_i_count_votes = './candidates/faculty_officers_1/faculty_of_information_technology' \
+                    '_1/faculty_of_information_technology_candidates_count_votes.csv'
+
+
+faculty_of_liberal = './candidates/faculty_officers_1/faculty_of_liberal_arts' \
+                     '_and_sciences_2/faculty_of_liberal_arts_and_sciences_candidates.txt'
+f_o_l_a_count_votes = './candidates/faculty_officers_1/faculty_of_liberal_arts_and_sciences' \
+                      '_2/faculty_of_liberal_arts_and_sciences_candidates_count_votes.csv'
+
+
+
+faculty_of_management = './candidates/faculty_officers_1/faculty_of_management_studies_3/' \
+                        'faculty_of_management_studies_candidates.txt'
+f_o_m_s_count_votes = './candidates/faculty_officers_1/faculty_of_management_studies_3/' \
+                      'faculty_of_management_studies_candidates_count_votes.csv'
+
+
+candidate_president = './candidates/presidents_3/presidents_0_candidates.txt'
+presidents_count_votes = './candidates/presidents_3/presidents_count_votes.csv'
+
+
+candidate_gsu_officer = './candidates/gsu_officers_2/gsu_officers_2_candidates.txt'
+gsu_officer_count_votes = './candidates/gsu_officers_2/gsu_officers_2_candidates_count_votes.csv'
+
+temp_username = []
+
+
+def img_source_dir():
+    script_path = os.path.abspath(__file__)  # Directory where this file is located ../STV-Voting-System/file.py
+    script_dir = os.path.split(script_path)[0]  # Directory after indexing to 0 ../STV-Voting-System/
+    rel_path = "img_sources"  # Folder name of the image sources
+    abs_file_path = os.path.join(script_dir, rel_path)  # ../STV-Voting-System/img_sources
+    return abs_file_path
+
+
+def pack_center_window(mainwindow):
+    mainwindow.pack()
+    mainwindow.place(relx=0.5, rely=0.5, anchor='center')
+    w, h = root.winfo_screenwidth(), root.winfo_screenheight()
+    root.geometry("%dx%d+0+0" % (w, h))
+    root.overrideredirect(1)
+
+
+def on_exit_button_click():
+    root.quit()
+
+
+class Setting:
+    def set_candidates(self):
+        columns = defaultdict(list)
+        with open(self) as info:
+            reader = csv.DictReader(info)
+            for row in reader:
+                for (header, value) in row.items():
+                    columns[header].append(str(value))
+
+            if self == candidate_president:
+                c01 = columns['faculty_candidate'][0];c02 = columns['faculty_candidate'][1]
+                c03 = columns['faculty_candidate'][2];c04 = columns['faculty_candidate'][3]
+                return c01, c02, c03, c04
+
+            elif self == candidate_gsu_officer:
+                c01 = columns['faculty_candidate'][0];c02 = columns['faculty_candidate'][1]
+                c03 = columns['faculty_candidate'][2];c04 = columns['faculty_candidate'][3]
+                c05 = columns['faculty_candidate'][4];c06 = columns['faculty_candidate'][5]
+                c07 = columns['faculty_candidate'][6];c08 = columns['faculty_candidate'][7]
+                c09 = columns['faculty_candidate'][8];c10 = columns['faculty_candidate'][9]
+                c11 = columns['faculty_candidate'][10];c12 = columns['faculty_candidate'][11]
+                return c01, c02, c03, c04, c05, c06, c07, c08, c09, c10, c11, c12
+
+            elif self == faculty_of_engineering or faculty_of_information \
+                    or faculty_of_liberal or faculty_of_management:
+                c01 = columns['faculty_candidate'][0];c02 = columns['faculty_candidate'][1]
+                c03 = columns['faculty_candidate'][2];c04 = columns['faculty_candidate'][3]
+                c05 = columns['faculty_candidate'][4];c06 = columns['faculty_candidate'][5]
+                c07 = columns['faculty_candidate'][6];c08 = columns['faculty_candidate'][7]
+                c09 = columns['faculty_candidate'][8];c10 = columns['faculty_candidate'][9]
+                c11 = columns['faculty_candidate'][10];c12 = columns['faculty_candidate'][11]
+                c13 = columns['faculty_candidate'][12];c14 = columns['faculty_candidate'][13]
+                c15 = columns['faculty_candidate'][14];c16 = columns['faculty_candidate'][15]
+                return c01, c02, c03, c04, c05, c06, c07, c08, c09, c10, c11, c12, c13, c14, c15, c16
